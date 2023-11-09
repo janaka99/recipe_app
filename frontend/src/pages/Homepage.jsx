@@ -24,7 +24,6 @@ export const Homepage = () => {
     const res = await API_URL.get("recipe/get-all");
 
     if (res.data) {
-      console.log(res.data.recipes);
       setRecipes(res.data.recipes);
     }
   };
@@ -72,13 +71,11 @@ export const Homepage = () => {
       </div>
       <section className="h-fit max-w-7xl  w-11/12 mx-auto columns-1 md:columns-2 lg:col-span-3 gap-10">
         {recipes?.map((recipe) => (
-          <>
-            <RecipeCard
-              recipe={recipe}
-              key={recipe._id}
-              loadRecipes={loadRecipes}
-            />
-          </>
+          <RecipeCard
+            recipe={recipe}
+            key={recipe._id}
+            loadRecipes={loadRecipes}
+          />
         ))}
       </section>
       <Footer />

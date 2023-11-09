@@ -10,6 +10,7 @@ router.get("/get-all", async (req, res) => {
     const recipes = await Recipe.find().populate({
       path: "user",
       model: User,
+      select: "username email",
     });
 
     res.status(200).json({ recipes });
@@ -35,17 +36,15 @@ router.post("/add-new", isLoggedIn, async (req, res) => {
       const recipes = await Recipe.find().populate({
         path: "user",
         model: User,
+        select: "username email",
       });
 
-      res.status(200).json({ recipes });
+      res.status(200).json({ message: "Successfull" });
     } else {
       res.status(400).json({ error: "Something went wrong" });
     }
   } catch (error) {
-    console.log(error.message);
-    res
-      .status(400)
-      .json({ error: "Something went wrong", error2: error.message });
+    res.status(400).json({ error: "Something went wrong" });
   }
 });
 

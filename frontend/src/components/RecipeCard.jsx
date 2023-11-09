@@ -42,28 +42,41 @@ const RecipeCard = ({ recipe, loadRecipes }) => {
         </p>
         <span className="bg-[#EA80FC] mx-auto mb-6 inline-block h-1 w-[90px] rounded"></span>
         <div className="flex flex-col mb-10 w-full items-center">
-          {recipe.ingredients.map((item) => (
-            <p className="dark:text-gray-400  text-black text-base leading-relaxed capitalize">
+          {recipe.ingredients.map((item, i) => (
+            <p
+              key={i}
+              className="dark:text-gray-400  text-black text-base leading-relaxed capitalize"
+            >
               {item}
             </p>
           ))}
         </div>
-        {user && user.email === recipe.user.email && (
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={`/edit/${recipe._id}`}
-              className="rounded-md bg-green-400 hover:bg-green-600 hover:text-slate-200 duration-300 p-2"
-            >
-              <BiEdit size={20} />
-            </a>
-            <button
-              onClick={() => handleDelete(recipe._id)}
-              className="rounded-md bg-red-400 hover:bg-red-600 hover:text-slate-200 duration-300 p-2"
-            >
-              <MdOutlineDelete size={20} />
-            </button>
+        <div className="flex items-center justify-between w-full gap-3">
+          <div className="flex gap-2 items-center text-sm">
+            <span>Uploaded By:</span>
+            <span className="capitalize font-semibold">
+              {user && user.email === recipe.user.email
+                ? "You"
+                : recipe.user.username}
+            </span>
           </div>
-        )}
+          {user && user.email === recipe.user.email && (
+            <div className="flex items-center gap-3">
+              <a
+                href={`/edit/${recipe._id}`}
+                className="rounded-md bg-green-400 hover:bg-green-600 hover:text-slate-200 duration-300 p-2"
+              >
+                <BiEdit size={20} />
+              </a>
+              <button
+                onClick={() => handleDelete(recipe._id)}
+                className="rounded-md bg-red-400 hover:bg-red-600 hover:text-slate-200 duration-300 p-2"
+              >
+                <MdOutlineDelete size={20} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
