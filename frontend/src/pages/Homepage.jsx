@@ -15,7 +15,6 @@ export const Homepage = () => {
     const res = await API_URL.get("recipe/get-all");
 
     if (res.data) {
-      console.log(res.data.recipes);
       setRecipes(res.data.recipes);
     }
   };

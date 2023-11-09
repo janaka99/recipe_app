@@ -82,7 +82,6 @@ export const authSlice = createSlice({
         state.message = "";
       })
       .addCase(validateUser.fulfilled, (state, action) => {
-        console.log(action);
         state.isLoading = false;
         state.user = action.payload;
         state.message = "";
